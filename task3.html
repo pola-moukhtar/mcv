@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <html lang="en">
+  <title>MCV Form</title>
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <form>
+    <label>Full Name:</label><br>
+    <input type="text" placeholder="Your Name" required title="write your name"><br><br>
+
+    <label>Email Address:</label><br>
+    <input type="email" placeholder="example@domain.com" required><br><br>
+    
+
+    <label>Phone Number:</label><br>
+    <input type="number" placeholder="0123456789" required
+           title="Phone must be 10 or 11 digits"><br><br>
+    
+
+
+  
+    <label >Preferred Contact Method:</label><br>
+    
+    <input type="radio" id="phone" name="pcontact">
+    <label for="phone">Phone</label>
+    
+    <input type="radio" id="email" name="pcontact">
+    <label for="email">Email</label>
+    <br><br>
+    
+  
+    <label>Services Interested In:</label><br>
+    <input type="checkbox" id="webdesign" name="services" value="webdesign">
+    <label for="webdesign">Web Design</label>
+    <input type="checkbox" id="seo" name="services" value="seo">
+    <label for="seo">SEO</label>
+    <input type="checkbox" id="hosting" name="services" value="hosting">
+    <label for="hosting">Hosting</label>
+    <br><br>
+    
+
+    <label for="city">City:</label><br>
+    <select id="city" name="city" required>
+      <option value="">--Select City--</option>
+      <option value="Cairo">Cairo</option>
+      <option value="Giza">Giza</option>
+      <option value="Alexandria">Alexandria</option>
+    </select><br><br>
+    
+
+    <label for="mm">Your Message:</label><br>
+    <textarea id="mm" placeholder="Write your message here..." required></textarea><br><br>
+    
+    <button type="submit">Send Message</button>
+  </form>
+
+  <br><br>
+        <a style="margin: 10px; text-decoration: none;color: black; background-color: bisque ;padding:5px; border-radius: 5px;" href="index.html">page 1</a> 
+        <a style="margin: 10px; text-decoration: none;color: black; background-color: bisque ;padding:5px; border-radius: 5px;" href=" task2.html">page 2</a> 
+        <a style="margin: 10px; text-decoration: none; color: black; background-color: bisque ;padding:5px; border-radius: 5px;" href=" task4.html">page 4</a> 
+</body>
+</html>
