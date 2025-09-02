@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Todo API Example</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <style>
+        
+        .todo-item {
+            margin: 5px 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            font-family: Arial, sans-serif;
+            width: 250px;
+        }
+        .done {
+            background-color: green;
+        }
+        .not-done {
+            background-color: red;
+        }
+        #todo{
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            flex-wrap: wrap;
+
+        }
+    </style>
+</head>
+<body >
+<div >
+    <h1>Todos from API</h1>
+    <div id="todo"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let todo = document.getElementById("todo");
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=30') 
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                todo.innerHTML += `
+                  <div class="todo-item ${item.completed ? 'done' : 'not-done'}">
+                      <span>Title: ${item.title}</span><br>
+                      <span>the user is is ${item.id}</span>
+                  </div>
+                `;
+            });
+        });
+</script>
+</body>
+</html>

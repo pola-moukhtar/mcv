@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Animation keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Apply animation */
+    .movie-card {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* Staggered effect */
+    .movie-card:nth-child(1) { animation-delay: 0.1s; }
+    .movie-card:nth-child(2) { animation-delay: 0.2s; }
+    .movie-card:nth-child(3) { animation-delay: 0.3s; }
+    .movie-card:nth-child(4) { animation-delay: 0.4s; }
+    .movie-card:nth-child(5) { animation-delay: 0.5s; }
+    .movie-card:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-4">
+  <h2 class="mb-4 text-center">🎬 Trending Movies</h2>
+  <div id="movies" class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Movies will be injected here -->
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NGE0MmZkNmJjZWMwMTBhZjk4ZDkzM2ZiMDQ3NjlhYiIsIm5iZiI6MTY1NjA2ODk3OS44NjMwMDAyLCJzdWIiOiI2MmI1OWI3MzI1Yjk1NTAwNTE2NTczNTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.HSGGJu0fSFl_WrYX5yWdjutBX5GD1nKMZ5zKbU_v_yk'
+  }
+};
+
+fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options)
+  .then(res => res.json())
+  .then(data => {
+    const movies = data.results;
+    const container = document.getElementById('movies');
+    container.innerHTML = ""; // clear existing content
+
+    movies.forEach((movie, index) => {
+      const poster = movie.poster_path 
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "https://via.placeholder.com/500x750?text=No+Image";
+
+      const col = document.createElement('div');
+      col.classList.add('col', 'movie-card'); // animation class
+
+      col.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <img src="${poster}" class="card-img-top" alt="${movie.title}">
+          <div class="card-body">
+            <h5 class="card-title">${movie.title}</h5>
+            <p class="card-text">${movie.overview ? movie.overview.slice(0, 100) + '...' : 'No description available.'}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Release: ${movie.release_date || 'N/A'}</small>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+  })
+  .catch(err => console.error(err));
+</script>
+</body>
+</html>
